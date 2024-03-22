@@ -1,3 +1,5 @@
+import { BrowserRouter as Router, Link, Routes, Route } from 'react-router-dom';
+import Arts from './Arts';
 import React, { useState } from 'react';
 import {
   Collapse,
@@ -15,26 +17,29 @@ function Headers(props) {
   const toggleNavbar = () => setCollapsed(!collapsed);
 
   return (
-    <div>
-      <Navbar color="faded" light>
-        <NavbarBrand href="/" className="me-auto">
-          reactstrap
-        </NavbarBrand>
-        <NavbarToggler onClick={toggleNavbar} className="me-2" />
-        <Collapse isOpen={!collapsed} navbar>
-          <Nav navbar>
-            <NavItem>
-              <NavLink href="/components/">Components</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href="https://github.com/reactstrap/reactstrap">
-                GitHub
-              </NavLink>
-            </NavItem>
-          </Nav>
-        </Collapse>
-      </Navbar>
-    </div>
+    <Router>
+      <div>
+        <Navbar color="faded" dark expand="md">
+          <NavbarBrand tag={Link} to="/" className="me-auto">
+            Museu de Arte
+          </NavbarBrand>
+          <NavbarToggler onClick={toggleNavbar} className="me-2" />
+          <Collapse isOpen={!collapsed} navbar>
+            <Nav navbar>
+              <NavItem>
+                <NavLink tag={Link} to="/arts">Galeria de Arte</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink href="https://github.com/NalielleSantos">GitHub</NavLink>
+              </NavItem>
+            </Nav>
+          </Collapse>
+        </Navbar>
+        <Routes>
+          <Route path="/arts" element={<Arts />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
